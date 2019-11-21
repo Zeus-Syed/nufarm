@@ -1,21 +1,39 @@
-<H4>USers Details</H4>
 
 
-<div class="container">    
-  <table class="table table-bordered table-hover">    
+
+<div class="container"> 
+    
+      <div class="row">
+        <div class="col">
+            <div class="form-group">
+        <input type="text" class="form-control" [(ngModel)]="orderInput" name="orderInput" placeholder="Enter Order Number">
+      </div>
+        </div>
+      <div class="col">
+          <div class="form-group">
+        <button class="btn btn-primary" (click)="fetchDetails(orderInput)" type="submit">Search</button>
+        </div>
+      </div> 
+      </div>
+    
+  
+  <table *ngIf="result.length>0; else empty" class="table table-bordered table-hover">    
     <tr>    
       <th>Id</th>    
-      <th>FirstName</th>    
-      <th>LastName</th>       
+      <th>Order Number</th>    
+      <th>Status</th> 
+      <th>Creation Date</th>   
     </tr>    
-    <tr *ngFor="let item of xmlItems">    
-      <td>{{item.id}}</td>    
-      <td>{{item.firstName}}</td>    
-      <td>{{item.lastName}}</td>   
+    <tr *ngFor="let x of result">    
+      <td>{{x.id}}</td>    
+      <td>{{x.orderNumber}}</td>    
+      <td>{{x.status}}</td>   
+      <td>{{x.creationDate}}</td>
     </tr>    
-  </table>    
+  </table>  
+  <ng-template #empty>No details</ng-template>  
 </div>  
 
-
+ 
 
 <router-outlet></router-outlet>

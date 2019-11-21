@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import xml2js from 'xml2js'; 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-
+import {ToastrManager} from 'ng6-toastr-notifications';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -9,7 +9,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class AppComponent implements OnInit{
   public xmlItems:any;
-  constructor(public http: HttpClient){}
+  public orderInput:any;
+  public result:any;
+  constructor(public http: HttpClient, public toastr: ToastrManager){}
 ngOnInit(){
 this.loadXML();
 }
@@ -25,7 +27,7 @@ public loadXML() {
       responseType: 'text'  
     })  
     .subscribe((data) => {
-    //  console.log(data);  
+     //console.log(data);  
       this.parseXML(data)  
         .then((data) => {  
           this.xmlItems = data; 
@@ -44,20 +46,38 @@ parseXML(data) {
           explicitArray: true  
         });  
     parser.parseString(data, function (err, result) { 
-      console.log(result); 
+      //console.log(result); 
       var obj = result.dataset;  
       for (k in obj.record) {  
         var item = obj.record[k];  
         arr.push({  
           id: item.id,  
-          firstName: item.first_name,  
-          lastName: item.last_name, 
+          orderNumber: item.order_number,  
+          status: item.status, 
+          creationDate: item.creation_date
         });  
       }  
       resolve(arr);  
     });  
   });  
 }  
+
+public fetchDetails(){
+      console.log(this.orderInput);
+
+      if(this.orderInput == undefined || this.orderInput == "" || this.orderInput == null){
+        this.toastr.warningToastr("Please enter Order Number");
+      }
+      else{
+    this.result = this.xmlItems.filter((e)=>{
+    return e.orderNumber == this.orderInput
+  })
+}
+  console.log(this.result)
+  if(this.result.length == 0){
+    this.toastr.warningToastr("No Order Number Found!!")
+  }
+}
 
 
 
