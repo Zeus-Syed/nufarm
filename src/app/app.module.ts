@@ -7,6 +7,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ng6-toastr-notifications';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatIconModule} from '@angular/material/icon';
+import { AngularDateTimePickerModule } from 'angular2-datetimepicker';
+
 @NgModule({
   declarations: [
     AppComponent
@@ -18,7 +20,8 @@ import {MatIconModule} from '@angular/material/icon';
     FormsModule,
     MatIconModule,
     ToastrModule.forRoot(),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    AngularDateTimePickerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

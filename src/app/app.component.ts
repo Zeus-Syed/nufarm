@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import xml2js from 'xml2js'; 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {ToastrManager} from 'ng6-toastr-notifications';
+import * as moment from 'moment';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -9,8 +10,11 @@ import {ToastrManager} from 'ng6-toastr-notifications';
 })
 export class AppComponent implements OnInit{
   public xmlItems:any;
+  public resultArray:any;
   public orderInput:any;
   public result:any;
+  public fromDate: Date;
+  public toDate: Date;
   constructor(public http: HttpClient, public toastr: ToastrManager){}
 ngOnInit(){
 this.loadXML();
@@ -31,7 +35,14 @@ public loadXML() {
       this.parseXML(data)  
         .then((data) => {  
           this.xmlItems = data; 
-          console.log(this.xmlItems); 
+         // console.log(this.xmlItems); 
+         let a:any;
+          a= this.xmlItems[0].creationDate;
+          console.log(moment(a).format("YYYY-MM-DD"));
+   this.xmlItems.sort(function(a:any,b:any){
+            return  a.creationDate - b.creationDate;
+  })
+  console.log(this.xmlItems);
         });  
     });  
 }
@@ -54,7 +65,7 @@ parseXML(data) {
           id: item.id,  
           orderNumber: item.order_number,  
           status: item.status, 
-          creationDate: item.creation_date
+          creationDate: new Date(item.creation_date)
         });  
       }  
       resolve(arr);  
@@ -79,7 +90,15 @@ public fetchDetails(){
   }
 }
 
+public fetchDetailsDate(){
+      console.log(this.fromDate);
+      console.log(this.toDate);
 
+      for(let x of this.xmlItems){
+             moment(x.creationDate).format("YYYY-MM-DD");
+      }
+      
+}
 
 
 }
