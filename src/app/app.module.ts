@@ -7,11 +7,16 @@ import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ng6-toastr-notifications';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatIconModule} from '@angular/material/icon';
-import { AngularDateTimePickerModule } from 'angular2-datetimepicker';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { RouterModule } from '@angular/router';
+import { ChartComponent } from './chart/chart.component';
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ChartComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
@@ -19,9 +24,14 @@ import { AngularDateTimePickerModule } from 'angular2-datetimepicker';
     HttpClientModule,
     FormsModule,
     MatIconModule,
+    NgMultiSelectDropDownModule.forRoot(),
     ToastrModule.forRoot(),
     BrowserAnimationsModule,
-    AngularDateTimePickerModule
+    RouterModule.forRoot([
+     {path: 'chart', component: ChartComponent},
+     {path: '', component: SearchComponent},
+     {path: 'search', component: SearchComponent}
+    ])
   ],
   providers: [],
   bootstrap: [AppComponent]

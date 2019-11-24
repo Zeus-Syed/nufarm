@@ -1,0 +1,7 @@
+.nav-link{
+    color: whitesmoke;
+    font-size: 125%;
+}
+.nav-link:hover{
+    color: skyblue;
+}

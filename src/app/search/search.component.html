@@ -1,0 +1,94 @@
+
+<nav class="navbar navbar-light bg-success">
+    <a class="navbar-brand" href="#">
+      <img src="./assets/Nufarm-002.png" width="50" height="50" alt="">
+    </a>
+    <ul class="nav mr-auto">
+            <li class="nav-item">
+    <a class="nav-link" [routerLink]="['/search']">Search</a>
+    </li>
+    <li class="nav-item">
+    <a class="nav-link" [routerLink]="['/chart']">Chart</a>
+    </li>
+</ul>
+    <button type="button" (click)="refresh()" class="btn btn-light">RESET</button>
+  </nav> 
+
+<div class="container">
+    
+    
+      <div class="row">
+        <div class="col" id="order">
+            <div class="form-group">
+              <label>Order Number Search</label>
+        <input type="text" class="form-control" [(ngModel)]="orderInput" name="orderInput" placeholder="Enter Order Number">
+      </div>
+      <div class="form-group">
+        <button class="btn btn-primary" (click)="fetchDetails()" type="submit">Search</button>
+        </div>
+        </div>
+      <div class="col" id="dRange">
+        <label>Date Range Search</label><br>
+        <label>From: </label><input type="date" [(ngModel)]="fromDate">
+        <label>To: </label><input type="date" [(ngModel)]="toDate"><br><br>
+        <button class="btn btn-primary" (click)="fetchDetailsDate()" type="submit">Search</button>
+      </div>
+
+      </div>
+    
+  <div class="orderData" *ngIf="result?.length>0; else empty">
+  <table  class="table table-hover">    
+    <tr>    
+      <th>Id</th>    
+      <th>Order Number</th>    
+      <th>Status</th> 
+      <th>Creation Date</th>   
+    </tr>    
+    <tr *ngFor="let x of result">    
+      <td>{{x.id}}</td>    
+      <td>{{x.orderNumber}}</td>    
+      <td>{{x.status}}</td>   
+      <td>{{x.creationDate | date: 'dd/MMM/yyyy'}}</td>
+    </tr>    
+  </table>  
+    
+</div>
+<ng-template #empty>
+  <p class="orderData">No details</p>
+</ng-template>
+
+<div class="dateData" *ngIf="resultArray?.length>0; else empty1" >
+    <label>Total Records: {{dateLength}}</label>
+  <table class="table table-hover"> 
+           <tr>    
+        <th>Id</th>    
+        <th>Order Number</th>    
+        <th><ng-multiselect-dropdown
+          [placeholder]="'Status'"
+          [data]="dropDownList"
+          [(ngModel)]="selectedItems"
+          [settings]="dropdownSettings"
+          (onSelect)="onItemSelect($event)"
+          (onSelectAll)="onSelectAll($event)"
+          (onDeSelect)="onItemDeselect($event)">
+          </ng-multiselect-dropdown>
+        </th> 
+        <th>Creation Date</th>   
+      </tr>    
+      <tr *ngFor="let y of resultArray">    
+        <td>{{y.id}}</td>    
+        <td>{{y.orderNumber}}</td>    
+        <td>{{y.status}}</td>   
+        <td>{{y.creationDate | date: 'dd/MMM/yyyy'}}</td>
+      </tr>    
+    </table>  
+      
+  </div>
+  
+  <ng-template #empty1>
+    <p class="dateData">No details</p>
+  </ng-template>
+
+</div>  
+
+

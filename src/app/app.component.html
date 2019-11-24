@@ -1,48 +1,5 @@
 
 
 
-<div class="container"> 
-    
-      <div class="row">
-        <div class="col">
-            <div class="form-group">
-              <label>Order Number Search</label>
-        <input type="text" class="form-control" [(ngModel)]="orderInput" name="orderInput" placeholder="Enter Order Number">
-      </div>
-      <div class="form-group">
-        <button class="btn btn-primary" (click)="fetchDetails()" type="submit">Search</button>
-        </div>
-        </div>
-        <mat-icon>autorenew</mat-icon>
-      <div class="col">
-        <label>Date Range Search</label><br>
-        <label>From: </label><input type="date" [(ngModel)]="fromDate">
-        <label>To: </label><input type="date" [(ngModel)]="toDate"><br><br>
-        <button class="btn btn-primary" (click)="fetchDetailsDate()" type="submit">Search</button>
-      </div>
-
-      </div>
-    
-  
-  <table *ngIf="result.length>0; else empty" class="table table-bordered table-hover">    
-    <tr>    
-      <th>Id</th>    
-      <th>Order Number</th>    
-      <th>Status</th> 
-      <th>Creation Date</th>   
-    </tr>    
-    <tr *ngFor="let x of result">    
-      <td>{{x.id}}</td>    
-      <td>{{x.orderNumber}}</td>    
-      <td>{{x.status}}</td>   
-      <td>{{x.creationDate}}</td>
-    </tr>    
-  </table>  
-  <ng-template #empty>No details</ng-template>  
-
-  
-</div>  
-
- 
 
 <router-outlet></router-outlet>

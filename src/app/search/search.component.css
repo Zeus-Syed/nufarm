@@ -1,0 +1,33 @@
+.col {
+    border-style: solid;
+    border-color: whitesmoke;
+    
+   }
+   
+   #order{
+       background-color: #FFCF79;
+   }
+   
+   #dRange{
+       background-color: #E5E4D7;
+   }
+   
+   .orderData{
+       background-color: #FFCF79;
+   }
+   
+   .dateData{
+       background-color: #E5E4D7;
+   }
+   
+   label{
+       font-weight: bolder;
+   }
+
+   .nav-link{
+       color: whitesmoke;
+       font-size: 125%;
+   }
+   .nav-link:hover{
+       color: skyblue;
+   }
