@@ -12,3 +12,13 @@
     </ul>
         
       </nav>
+<h3>Status</h3>
+      <div style="display: block;" *ngIf = "chartData">
+        <canvas baseChart
+                    [data]="chartData"
+                    [labels]="chartLabel"
+                    [chartType]="chartType"
+                    [options]="chartOptions"></canvas>
+      </div>
+
+

@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ToastrManager } from 'ng6-toastr-notifications';
 import * as moment from 'moment';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { ChartService } from '../chart.service';
 
 @Component({
   selector: 'app-search',
@@ -24,7 +25,7 @@ export class SearchComponent implements OnInit {
   public selectedItems = [];
   public dropdownSettings: IDropdownSettings  = {};
   public filterArray = [];
-  constructor(public http: HttpClient, public toastr: ToastrManager) { }
+  constructor(public http: HttpClient, public toastr: ToastrManager, public chartService: ChartService) { }
   ngOnInit() {
     this.loadXML();
   }
@@ -52,6 +53,7 @@ export class SearchComponent implements OnInit {
               return a.creationDate - b.creationDate;
             })
             console.log(this.xmlItems);
+            this.chartService.setXmlItems(this.xmlItems);
           });
       });
   }

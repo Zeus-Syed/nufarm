@@ -6,11 +6,12 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ng6-toastr-notifications';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatIconModule} from '@angular/material/icon';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { RouterModule } from '@angular/router';
 import { ChartComponent } from './chart/chart.component';
 import { SearchComponent } from './search/search.component';
+import { ChartService } from './chart.service';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,7 @@ import { SearchComponent } from './search/search.component';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    MatIconModule,
+    ChartsModule,
     NgMultiSelectDropDownModule.forRoot(),
     ToastrModule.forRoot(),
     BrowserAnimationsModule,
@@ -33,7 +34,7 @@ import { SearchComponent } from './search/search.component';
      {path: 'search', component: SearchComponent}
     ])
   ],
-  providers: [],
+  providers: [ChartService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
